@@ -49,7 +49,7 @@ extension MGPhotoTool: WCLImagePikcerDelegate {
                                     action in
                                     guard let phoneURL = URL(string: UIApplicationOpenSettingsURLString) else {  return
                                     }
-                                    UIApplication.shared.open(phoneURL)
+                                    UIApplication.shared.openURL(phoneURL)
             })
             al.addAction(ok)
         }

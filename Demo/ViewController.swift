@@ -52,7 +52,7 @@ class ViewController: UIViewController, WCLImagePikcerDelegate {
                                     action in
                                     guard let phoneURL = URL(string: UIApplicationOpenSettingsURLString) else {  return
                                     }
-                                    UIApplication.shared.open(phoneURL, options: [:], completionHandler: nil)
+                                    UIApplication.shared.openURL(phoneURL)
             })
             al.addAction(ok)
         }
