@@ -61,11 +61,19 @@ public class WCLImagePickerController: UIViewController {
     
     
     //MARK: Override
+    public override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if !WCLImagePickerOptions.isShowLaunch {
+            photoAuthorization()
+            checkWithPhoto()
+        }
+    }
+    
     public override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        isViewDidLoad = true
-        if firstLaunch == true && PHPhotoLibrary.authorizationStatus() == PHAuthorizationStatus.authorized {
-            configPhotoVC()
+        if WCLImagePickerOptions.isShowLaunch {
+            photoAuthorization()
+            checkWithPhoto()
         }
     }
     
@@ -74,7 +82,9 @@ public class WCLImagePickerController: UIViewController {
         // Do any additional setup after loading the view.
         photoAuthorization()
         //添加launchView
-        navigationController?.view.addSubview(launchView)
+        if WCLImagePickerOptions.isShowLaunch {
+            navigationController?.view.addSubview(launchView)
+        }
         configNav()
         addNotify()
     }
@@ -82,6 +92,31 @@ public class WCLImagePickerController: UIViewController {
     override public func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func checkWithPhoto() {
+        isViewDidLoad = true
+//        let author = PHPhotoLibrary.authorizationStatus()
+//        if author == .denied || author == .restricted {
+//            let alertController = UIAlertController(title: "通知",
+//                                                    message: "需要打开图片访问权限，才可以查看图片哟~",
+//                                                    preferredStyle: .alert)
+//            let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+//            let okAction = UIAlertAction(title: "去设置", style: .default,
+//                                         handler: {
+//                                            action in
+//                                            guard let phoneURL = URL(string: UIApplicationOpenSettingsURLString) else {  return
+//                                            }
+//                                            UIApplication.shared.open(phoneURL, options: [:], completionHandler: nil)
+//            })
+//            alertController.addAction(cancelAction)
+//            alertController.addAction(okAction)
+//            navigationController?.present(alertController, animated: true, completion: nil)
+//        }
+        
+        if firstLaunch == true && PHPhotoLibrary.authorizationStatus() == PHAuthorizationStatus.authorized {
+            configPhotoVC()
+        }
     }
     
     override func photoLeftAction(_ sender: UIButton) {
@@ -185,7 +220,7 @@ public class WCLImagePickerController: UIViewController {
         if isViewDidLoad == false {
             return
         }
-        if firstLaunch {
+        if firstLaunch && WCLImagePickerOptions.isShowLaunch {
             launchView.starAnimation()
             firstLaunch = false
         }

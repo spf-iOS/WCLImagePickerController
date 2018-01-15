@@ -45,6 +45,8 @@ public struct WCLImagePickerOptions {
     
     /// launchImage的配置
     /// 相册启动图片和启动颜色，二选一，launchImage优先级高
+    /// 没有设置默认用imageTintColor
+    public static var isShowLaunch: Bool   = true
     public static var launchImage: UIImage?   = nil
     /// 没有设置默认用imageTintColor
     public static var launchColor: UIColor?   = nil

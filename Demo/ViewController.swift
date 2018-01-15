@@ -14,6 +14,7 @@ class ViewController: UIViewController, WCLImagePikcerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        WCLImagePickerOptions.isShowLaunch = false
         WCLImagePickerOptions.navigationTintColor = UIColor(red: 51.0/255.0, green: 51.0/255.0, blue: 51.0/255.0, alpha: 1)
         WCLImagePickerOptions.navigationImageColor = UIColor(red: 155.0/255.0, green: 155.0/255.0, blue: 155.0/255.0, alpha: 1)
         WCLImagePickerOptions.tintColor = UIColor(red: 248.0/255.0, green: 248.0/255.0, blue: 248.0/255.0, alpha: 1)
