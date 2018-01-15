@@ -42,6 +42,16 @@ class ViewController: UIViewController, WCLImagePikcerDelegate {
         let al = UIAlertController.init(title: nil, message: error.lcalizable, preferredStyle: .alert)
         let cancel = UIAlertAction.init(title: "取消", style: .cancel, handler: nil)
         al.addAction(cancel)
+        if error != .noMoreThanImages {
+            let ok = UIAlertAction(title: "去设置", style: .default,
+                                   handler: {
+                                    action in
+                                    guard let phoneURL = URL(string: UIApplicationOpenSettingsURLString) else {  return
+                                    }
+                                    UIApplication.shared.open(phoneURL, options: [:], completionHandler: nil)
+            })
+            al.addAction(ok)
+        }
         picker.present(al, animated: true, completion: nil)
     }
     

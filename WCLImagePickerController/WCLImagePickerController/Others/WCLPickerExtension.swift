@@ -38,7 +38,7 @@ internal extension UIViewController {
         rightBt.setTitleColor(WCLImagePickerOptions.navigationTintColor, for: UIControlState())
         rightBt.titleLabel?.font = UIFont.WCLRegularFontOfSize(15)
         rightBt.addTarget(self, action: #selector(photoRightAction(_:)), for: .touchUpInside)
-        rightBt.frame.size = CGSize(width: 16*CGFloat(btName.characters.count), height: 20)
+        rightBt.frame.size = CGSize(width: 16*CGFloat(btName.count), height: 20)
         navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: rightBt)
         return rightBt
     }
@@ -53,7 +53,7 @@ internal extension UIViewController {
         leftBt.setTitle(btName, for: UIControlState())
         leftBt.setTitleColor(WCLImagePickerOptions.navigationTintColor, for: UIControlState())
         leftBt.titleLabel?.font = UIFont.WCLRegularFontOfSize(15)
-        leftBt.frame.size = CGSize(width: 16*CGFloat(btName.characters.count), height: 20)
+        leftBt.frame.size = CGSize(width: 16*CGFloat(btName.count), height: 20)
         leftBt.addTarget(self, action: #selector(photoLeftAction(_:)), for: .touchUpInside)
         leftBt.sizeToFit()
         navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: leftBt)
@@ -74,11 +74,11 @@ internal extension UIViewController {
         return titleLable
     }
     
-    func photoLeftAction(_ sender: UIButton) {
+    @objc func photoLeftAction(_ sender: UIButton) {
         
     }
     
-    func photoRightAction(_ sender: UIButton) {
+    @objc func photoRightAction(_ sender: UIButton) {
         
     }
 }

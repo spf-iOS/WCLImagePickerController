@@ -192,7 +192,7 @@ public class WCLImagePickerController: UIViewController {
         // 用户无法解决的无法访问
         case .authorized:
             // 用户已授权
-            configPhotoVC()
+//            configPhotoVC()
             break
         }
     }
@@ -201,8 +201,10 @@ public class WCLImagePickerController: UIViewController {
         if isViewDidLoad == false {
             return
         }
-        if firstLaunch && WCLImagePickerOptions.isShowLaunch {
-            launchView.starAnimation()
+        if firstLaunch {
+            if WCLImagePickerOptions.isShowLaunch {
+                launchView.starAnimation()
+            }
             firstLaunch = false
         }
         pickerManager = WCLPickerManager()
@@ -262,7 +264,7 @@ public class WCLImagePickerController: UIViewController {
         if cameraAuthorization() {
             pickerView.navigationBar.barTintColor = WCLImagePickerOptions.tintColor
             pickerView.navigationBar.tintColor    = WCLImagePickerOptions.navigationTintColor
-            pickerView.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: WCLImagePickerOptions.navigationTintColor]
+            pickerView.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: WCLImagePickerOptions.navigationTintColor]
             pickerView.delegate = self
             pickerView.sourceType = .camera
             self.present(pickerView, animated: true, completion: nil)
@@ -270,8 +272,8 @@ public class WCLImagePickerController: UIViewController {
     }
     
     fileprivate func cameraAuthorization() -> Bool {
-        let mediaType = AVMediaTypeVideo
-        let authorizationStatus = AVCaptureDevice.authorizationStatus(forMediaType: mediaType)
+        let mediaType = AVMediaType.video
+        let authorizationStatus = AVCaptureDevice.authorizationStatus(for: mediaType)
         /// 是否在模拟器
         #if (arch(i386) || arch(x86_64)) && os(iOS)
             NotificationCenter.default.post(name: WCLImagePickerNotify.imagePickerError, object: WCLError.noCameraPermissions)
