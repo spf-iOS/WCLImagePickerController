@@ -8,16 +8,17 @@
 
 Pod::Spec.new do |s|
 
-  s.name          = "WCLImagePickerController"
-  s.version       = "1.0.5"
+  s.name          = "MGPhotoLib"
+  s.version       = "1.0.0"
   s.summary       = "由swift实现可自定义的图片选择器。"
 
-  s.homepage      = "https://github.com/631106979/WCLImagePickerController"
+  s.homepage      = "https://github.com/spf-iOS/WCLImagePickerController"
   s.license       = 'MIT'
   s.author        = { "W_C__L" => "wangchonglei93@icloud.com" }
   s.platform      = :ios, "8.0"
-  s.source        = { :git => "https://github.com/631106979/WCLImagePickerController.git", :tag => "1.0.5" }
+  s.source        = { :git => "https://github.com/spf-iOS/WCLImagePickerController.git", :tag => s.version.to_s }
   s.source_files  = 'WCLImagePickerController/**/*.{swift,xib}'
+  s.public_header_files = 'WCLImagePickerController/ViewControllers/MGPhotoTool.swift'
   s.resources     = 'WCLImagePickerController/WCLImagePickerController/WCLImagePickerController.bundle'
   s.frameworks    = "UIKit", "Photos"
   s.requires_arc  = true

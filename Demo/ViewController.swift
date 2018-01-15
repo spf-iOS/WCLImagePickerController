@@ -24,9 +24,13 @@ class ViewController: UIViewController, WCLImagePikcerDelegate {
 
     @IBAction func buttonAction(_ sender: Any) {
         /// 初始化，直接present出WCLImagePickerController
-        WCLImagePickerController.present(inVC: self, delegate: self)
+//        WCLImagePickerController.present(inVC: self, delegate: self)
         /// 或者只初始化WCLImagePickerController.init
         /// WCLImagePickerController.init(delegate: self)
+        
+        MGPhoto.showView(selectMaxNum: 3) { (images) in
+            print("\(images)")
+        }
     }
     
     func wclImagePickerCancel(_ picker: WCLImagePickerController) {
