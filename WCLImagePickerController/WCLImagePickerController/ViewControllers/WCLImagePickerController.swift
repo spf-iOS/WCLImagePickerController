@@ -64,7 +64,6 @@ public class WCLImagePickerController: UIViewController {
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if !WCLImagePickerOptions.isShowLaunch {
-            photoAuthorization()
             checkWithPhoto()
         }
     }
@@ -72,7 +71,6 @@ public class WCLImagePickerController: UIViewController {
     public override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if WCLImagePickerOptions.isShowLaunch {
-            photoAuthorization()
             checkWithPhoto()
         }
     }
@@ -80,7 +78,7 @@ public class WCLImagePickerController: UIViewController {
     override public func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        photoAuthorization()
+//        photoAuthorization()
         //添加launchView
         if WCLImagePickerOptions.isShowLaunch {
             navigationController?.view.addSubview(launchView)
@@ -96,24 +94,7 @@ public class WCLImagePickerController: UIViewController {
     
     func checkWithPhoto() {
         isViewDidLoad = true
-//        let author = PHPhotoLibrary.authorizationStatus()
-//        if author == .denied || author == .restricted {
-//            let alertController = UIAlertController(title: "通知",
-//                                                    message: "需要打开图片访问权限，才可以查看图片哟~",
-//                                                    preferredStyle: .alert)
-//            let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
-//            let okAction = UIAlertAction(title: "去设置", style: .default,
-//                                         handler: {
-//                                            action in
-//                                            guard let phoneURL = URL(string: UIApplicationOpenSettingsURLString) else {  return
-//                                            }
-//                                            UIApplication.shared.open(phoneURL, options: [:], completionHandler: nil)
-//            })
-//            alertController.addAction(cancelAction)
-//            alertController.addAction(okAction)
-//            navigationController?.present(alertController, animated: true, completion: nil)
-//        }
-        
+        photoAuthorization()
         if firstLaunch == true && PHPhotoLibrary.authorizationStatus() == PHAuthorizationStatus.authorized {
             configPhotoVC()
         }
