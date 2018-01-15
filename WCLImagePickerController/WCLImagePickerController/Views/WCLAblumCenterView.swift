@@ -52,7 +52,7 @@ internal class WCLAblumCenterView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        titleLabel.textColor = UIColor.white
+        titleLabel.textColor = WCLImagePickerOptions.navigationTintColor
         addSubview(arrowImageView)
         addSubview(titleLabel)
         //添加约束

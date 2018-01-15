@@ -61,9 +61,13 @@ public struct WCLImagePickerOptions {
     public static var selectPlaceholder: UIImage? = WCLImagePickerBundle.imageFromBundle("image_selectPlaceholder")
     
     /// 颜色的配置
-    public static var tintColor: UIColor       = UIColor(red: 49/255, green: 47/255, blue: 47/255, alpha: 1)
+    public static var tintColor: UIColor = UIColor(red: 49/255, green: 47/255, blue: 47/255, alpha: 1)
     /// 没有设置默认用imageTintColor
-    public static var pickerSelectColor: UIColor?   = UIColor(red: 255/255, green: 0/255, blue: 27/255, alpha: 1)
+    public static var pickerSelectColor: UIColor?  = UIColor(red: 255/255, green: 0/255, blue: 27/255, alpha: 1)
     /// 没有设置默认用imageTintColor
-    public static var selectViewBackColor: UIColor? = nil
+    public static var selectViewBackColor: UIColor? =  UIColor(red: 248/255, green: 248/255, blue: 248/255, alpha: 1)
+    ///navBar的文字颜色
+    public static var navigationTintColor: UIColor = UIColor.white
+    ///navBar的图片颜色
+    public static var navigationImageColor: UIColor? //= UIColor.red
 }

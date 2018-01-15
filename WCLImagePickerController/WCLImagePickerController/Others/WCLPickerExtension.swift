@@ -35,7 +35,7 @@ internal extension UIViewController {
         let rightBt = UIButton()
         rightBt.contentHorizontalAlignment = .right
         rightBt.setTitle(btName, for: UIControlState())
-        rightBt.setTitleColor(UIColor.white, for: UIControlState())
+        rightBt.setTitleColor(WCLImagePickerOptions.navigationTintColor, for: UIControlState())
         rightBt.titleLabel?.font = UIFont.WCLRegularFontOfSize(15)
         rightBt.addTarget(self, action: #selector(photoRightAction(_:)), for: .touchUpInside)
         rightBt.frame.size = CGSize(width: 16*CGFloat(btName.characters.count), height: 20)
@@ -51,7 +51,7 @@ internal extension UIViewController {
         let leftBt = UIButton()
         leftBt.contentHorizontalAlignment = .left
         leftBt.setTitle(btName, for: UIControlState())
-        leftBt.setTitleColor(UIColor.white, for: UIControlState())
+        leftBt.setTitleColor(WCLImagePickerOptions.navigationTintColor, for: UIControlState())
         leftBt.titleLabel?.font = UIFont.WCLRegularFontOfSize(15)
         leftBt.frame.size = CGSize(width: 16*CGFloat(btName.characters.count), height: 20)
         leftBt.addTarget(self, action: #selector(photoLeftAction(_:)), for: .touchUpInside)
@@ -67,7 +67,7 @@ internal extension UIViewController {
     func setWCLPhotoNavTitle(_ title:String) -> UILabel {
         let titleLable = UILabel()
         titleLable.text = title
-        titleLable.textColor = UIColor.white
+        titleLable.textColor = WCLImagePickerOptions.navigationTintColor
         titleLable.font = UIFont.WCLMediumFontOfSize(17)
         titleLable.sizeToFit()
         navigationItem.titleView = titleLable

@@ -56,6 +56,9 @@ internal class WCLPhotoBrowserController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        automaticallyAdjustsScrollViewInsets = false
+        
         // Do any additional setup after loading the view.
         context = WCLPhotoCellContext.init(pickerManager: pickerManager)
         context?.register(collectionView: photoBrowserView)
@@ -196,7 +199,7 @@ extension WCLPhotoBrowserController:  UICollectionViewDelegate,
     //MARK: UICollectionViewDelegateFlowLayout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let bounds = UIScreen.main.bounds
-        return CGSize(width: bounds.width + 20, height: bounds.height - 64)
+        return CGSize(width: bounds.width + 20, height: bounds.height - 88)
     }
     
     //MARK: UICollectionViewDataSource

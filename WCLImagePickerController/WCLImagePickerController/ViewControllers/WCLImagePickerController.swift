@@ -245,8 +245,8 @@ public class WCLImagePickerController: UIViewController {
     fileprivate func imageCamereShow() {
         if cameraAuthorization() {
             pickerView.navigationBar.barTintColor = WCLImagePickerOptions.tintColor
-            pickerView.navigationBar.tintColor    = UIColor.white
-            pickerView.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+            pickerView.navigationBar.tintColor    = WCLImagePickerOptions.navigationTintColor
+            pickerView.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: WCLImagePickerOptions.navigationTintColor]
             pickerView.delegate = self
             pickerView.sourceType = .camera
             self.present(pickerView, animated: true, completion: nil)

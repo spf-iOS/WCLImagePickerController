@@ -45,7 +45,9 @@ internal class WCLSelectView: UIView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
         translatesAutoresizingMaskIntoConstraints = false
+        
         let size = CGSize.init(width: 22, height: 22)
         UIGraphicsBeginImageContextWithOptions(size, false, UIScreen.main.scale)
         let context = UIGraphicsGetCurrentContext()
@@ -60,7 +62,18 @@ internal class WCLSelectView: UIView {
         UIGraphicsEndImageContext()
         selectBt.setImage(selectImage, for: .selected)
         
-        selectBt.setImage(WCLImagePickerBundle.imageFromBundle("image_pickerDefault"), for: .normal)
+        if let imageColor = WCLImagePickerOptions.navigationImageColor {
+            var image = WCLImagePickerBundle.imageFromBundle("image_pickerDefault")
+            image = image?.withRenderingMode(.alwaysTemplate)
+            selectBt.setImage(image, for: .normal)
+            selectBt.setImage(image, for: .highlighted)
+            selectBt.tintColor = imageColor
+        }
+        else {
+            let image = WCLImagePickerBundle.imageFromBundle("image_pickerDefault")
+            selectBt.setImage(image, for: .normal)
+            selectBt.setImage(image, for: .normal)
+        }
     }
     
     override var intrinsicContentSize: CGSize {
