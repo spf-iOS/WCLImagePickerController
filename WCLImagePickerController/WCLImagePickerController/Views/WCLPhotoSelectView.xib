@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="PingFang.ttc">
+            <string>PingFangSC-Regular</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -30,6 +35,9 @@
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="qQu-wy-MUR">
                     <rect key="frame" x="0.0" y="0.0" width="315" height="47"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="47" id="vEB-KE-j8G"/>
+                    </constraints>
                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="7" minimumInteritemSpacing="7" id="et3-Ly-BC3">
                         <size key="itemSize" width="33" height="33"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -45,12 +53,10 @@
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="zEC-E4-lqj" firstAttribute="centerY" secondItem="VzP-11-cfs" secondAttribute="centerY" id="3pM-9I-p68"/>
                 <constraint firstItem="qQu-wy-MUR" firstAttribute="top" secondItem="VzP-11-cfs" secondAttribute="top" id="4w9-ru-3jj"/>
                 <constraint firstItem="qQu-wy-MUR" firstAttribute="leading" secondItem="VzP-11-cfs" secondAttribute="leading" id="6B4-7l-2PC"/>
                 <constraint firstAttribute="trailing" secondItem="qQu-wy-MUR" secondAttribute="trailing" constant="60" id="EL5-wy-JQl"/>
-                <constraint firstAttribute="height" constant="47" id="LCG-er-pGs"/>
-                <constraint firstAttribute="bottom" secondItem="qQu-wy-MUR" secondAttribute="bottom" id="RUx-5D-0ct"/>
+                <constraint firstItem="oyv-WV-cde" firstAttribute="centerY" secondItem="qQu-wy-MUR" secondAttribute="centerY" id="KZt-GS-LDk"/>
                 <constraint firstItem="oyv-WV-cde" firstAttribute="centerY" secondItem="zEC-E4-lqj" secondAttribute="centerY" id="Ubh-3L-qjX"/>
                 <constraint firstAttribute="trailing" secondItem="zEC-E4-lqj" secondAttribute="trailing" constant="17" id="r33-rh-ZJq"/>
                 <constraint firstItem="oyv-WV-cde" firstAttribute="centerX" secondItem="zEC-E4-lqj" secondAttribute="centerX" id="y6c-tc-jdL"/>

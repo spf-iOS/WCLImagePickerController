@@ -69,6 +69,10 @@ internal class WCLAblumCenterView: UIView {
         selectBlockAction()
     }
     
+    override var intrinsicContentSize: CGSize {
+        return CGSize(width: 220, height: 44)
+    }
+    
     func selectBlockAction() {
         if selectBlock != nil {
             selectBlock!(isSelect)

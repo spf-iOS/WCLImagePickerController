@@ -223,14 +223,16 @@ public class WCLImagePickerController: UIViewController {
     fileprivate func addSelectView() {
         if WCLImagePickerOptions.isShowSelecView {
             let bounds = UIScreen.main.bounds
-            photoSelectView = WCLPhotoSelectView.init(frame: CGRect.init(origin: CGPoint.init(x: 0, y: bounds.height - 47 - 64), size: CGSize.init(width: bounds.width, height: 47)), pickerManager: pickerManager!)
+            let iphone_X: Bool = (bounds.height == 812)
+            let bottomMargin: CGFloat = iphone_X ? 34.0:0.0
+            photoSelectView = WCLPhotoSelectView.init(frame: CGRect.init(origin: CGPoint.init(x: 0, y: bounds.height - (47 + bottomMargin + 64)), size: CGSize.init(width: bounds.width, height: (47 + bottomMargin))), pickerManager: pickerManager!)
             photoSelectView?.pushBlock = { [weak self] (vc) in
                 self?.navigationController?.pushViewController(vc, animated: true)
             }
-            photoAblumCV.contentInset = UIEdgeInsetsMake(0, 0, 47, 0)
+            photoAblumCV.contentInset = UIEdgeInsetsMake(0, 0, (47 + bottomMargin), 0)
             photoSelectView?.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview(photoSelectView!)
-            photoSelectView?.addConstraint(NSLayoutConstraint(item: photoSelectView!, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1.0, constant: 47))
+            photoSelectView?.addConstraint(NSLayoutConstraint(item: photoSelectView!, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1.0, constant: 47 + bottomMargin))
             view.addConstraint(NSLayoutConstraint(item: photoSelectView!, attribute: .left, relatedBy: .equal, toItem: view, attribute: .left, multiplier: 1.0, constant: 0))
             view.addConstraint(NSLayoutConstraint(item: photoSelectView!, attribute: .right, relatedBy: .equal, toItem: view, attribute: .right, multiplier: 1.0, constant: 0))
             view.addConstraint(NSLayoutConstraint(item: photoSelectView!, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1.0, constant: 0))

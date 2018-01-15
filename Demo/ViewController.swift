@@ -46,7 +46,7 @@ class ViewController: UIViewController, WCLImagePikcerDelegate {
     
     
     @IBAction func tintColorChange(_ sender: UISegmentedControl) {
-        let color = [UIColor(red: 49/255, green: 47/255, blue: 47/255, alpha: 1), UIColor.blue, UIColor.yellow][sender.selectedSegmentIndex]
+        let color = [UIColor(red: 49/255, green: 47/255, blue: 47/255, alpha: 1), UIColor.blue, UIColor.white][sender.selectedSegmentIndex]
         WCLImagePickerOptions.tintColor = color
     }
     

@@ -45,7 +45,7 @@ internal class WCLSelectView: UIView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        translatesAutoresizingMaskIntoConstraints = false
         let size = CGSize.init(width: 22, height: 22)
         UIGraphicsBeginImageContextWithOptions(size, false, UIScreen.main.scale)
         let context = UIGraphicsGetCurrentContext()
@@ -61,6 +61,10 @@ internal class WCLSelectView: UIView {
         selectBt.setImage(selectImage, for: .selected)
         
         selectBt.setImage(WCLImagePickerBundle.imageFromBundle("image_pickerDefault"), for: .normal)
+    }
+    
+    override var intrinsicContentSize: CGSize {
+        return CGSize(width: 35, height: 44)
     }
     
     //MARK: init Methods
