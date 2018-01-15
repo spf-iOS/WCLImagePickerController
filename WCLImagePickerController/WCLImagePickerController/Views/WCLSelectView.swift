@@ -66,12 +66,10 @@ internal class WCLSelectView: UIView {
             var image = WCLImagePickerBundle.imageFromBundle("image_pickerDefault")
             image = image?.withRenderingMode(.alwaysTemplate)
             selectBt.setImage(image, for: .normal)
-            selectBt.setImage(image, for: .highlighted)
             selectBt.tintColor = imageColor
         }
         else {
             let image = WCLImagePickerBundle.imageFromBundle("image_pickerDefault")
-            selectBt.setImage(image, for: .normal)
             selectBt.setImage(image, for: .normal)
         }
     }
