@@ -71,7 +71,9 @@ internal class WCLPhotoBrowserController: UIViewController {
             self.photoBrowserView.setContentOffset(CGPoint.init(x: (size.width+20)*CGFloat(self.currentIndex), y: 0), animated: false)
             self.pickerManager.isSynchronous = false
         }
+        selecView.frame = CGRect(x: 0, y: 0, width: 35, height: 44)
         navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: selecView)
+        
         selecView.selectBt.addTarget(self, action: #selector(selectViewAction(_ :)), for: .touchUpInside)
     }
 

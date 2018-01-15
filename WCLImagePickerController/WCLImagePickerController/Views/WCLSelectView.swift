@@ -46,8 +46,6 @@ internal class WCLSelectView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        translatesAutoresizingMaskIntoConstraints = false
-        
         let size = CGSize.init(width: 22, height: 22)
         UIGraphicsBeginImageContextWithOptions(size, false, UIScreen.main.scale)
         let context = UIGraphicsGetCurrentContext()
