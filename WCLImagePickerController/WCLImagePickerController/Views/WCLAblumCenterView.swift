@@ -45,7 +45,20 @@ internal class WCLAblumCenterView: UIView {
         }
     }
     
-    private let arrowImageView = UIImageView.init(image: WCLImagePickerOptions.pickerArrow)
+    private lazy var arrowImageView: UIImageView = {
+        let imageColor = WCLImagePickerOptions.navigationTintColor
+        if imageColor != UIColor.white {
+            var image = WCLImagePickerOptions.pickerArrow
+            image = image?.withRenderingMode(.alwaysTemplate)
+            let imageView = UIImageView(image: image)
+            imageView.tintColor = imageColor
+            return imageView
+        }
+        else {
+            let image = WCLImagePickerOptions.pickerArrow
+            return UIImageView(image: image)
+        }
+    }()
     private let titleLabel = UILabel()
     
     //MARK: Override

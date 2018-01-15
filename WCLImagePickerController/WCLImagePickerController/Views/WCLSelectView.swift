@@ -61,7 +61,6 @@ internal class WCLSelectView: UIView {
         let selectImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         selectBt.setImage(selectImage, for: .selected)
-        
         if let imageColor = WCLImagePickerOptions.navigationImageColor {
             var image = WCLImagePickerBundle.imageFromBundle("image_pickerDefault")
             image = image?.withRenderingMode(.alwaysTemplate)
