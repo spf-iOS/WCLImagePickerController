@@ -57,6 +57,7 @@ public class WCLPickerManager: NSObject {
         super.init()
         //图片请求设置成快速获取
         self.photoOption.resizeMode   = .fast
+        self.photoOption.isNetworkAccessAllowed = true
         self.photoOption.deliveryMode = .opportunistic
         getPhotoAlbum()
     }

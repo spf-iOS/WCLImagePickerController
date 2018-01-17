@@ -281,7 +281,7 @@ public class WCLImagePickerController: UIViewController {
         #else
             if authorizationStatus == .restricted || authorizationStatus == .denied {
                 NotificationCenter.default.post(name: WCLImagePickerNotify.imagePickerError, object: WCLError.noCameraPermissions)
-                AVCaptureDevice.requestAccess(forMediaType: mediaType, completionHandler: { (flag) in
+                AVCaptureDevice.requestAccess(for: mediaType, completionHandler: { (flag) in
                     if flag {
                         self.imageCamereShow()
                     }
