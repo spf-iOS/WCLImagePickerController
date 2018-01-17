@@ -29,13 +29,22 @@ class WCLPickerCVCell: UICollectionViewCell,
 
     @IBOutlet weak var selectNumBt: UIButton!
     @IBOutlet weak var photoImageView: UIImageView!
+    @IBOutlet weak var netbgView: UIView!
+    @IBOutlet weak var downloadImageView: UIImageView!
+    @IBOutlet weak var netbgImageViewTop: NSLayoutConstraint!
+    
+    var isLoading:Bool = false
+    
     var selectBlock:(()->Void)?
+    
+    var selectNetBgBlock:(()->Void)?
     
     //MARK: - Override
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         selectNumBt.setBackgroundImage(WCLImagePickerOptions.pickerDefault, for: .normal)
+        downloadImageView.image = WCLImagePickerBundle.imageFromBundle("download")
         
         let size = WCLImagePickerOptions.pickerDefault?.size ?? CGSize.zero
         UIGraphicsBeginImageContextWithOptions(size, false, UIScreen.main.scale)
@@ -50,6 +59,10 @@ class WCLPickerCVCell: UICollectionViewCell,
         let selectImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         selectNumBt.setBackgroundImage(selectImage, for: .selected)
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(selectNetBgView))
+        netbgView.addGestureRecognizer(tap)
+        netbgView.isUserInteractionEnabled = true
     }
     
     //MARK: - Public Methods
@@ -67,6 +80,13 @@ class WCLPickerCVCell: UICollectionViewCell,
     @IBAction func selectAction(_ sender: UIButton) {
         if selectBlock != nil {
             selectBlock!()
+        }
+    }
+    
+    @objc func selectNetBgView() {
+        if let `selectNetBgBlock` = selectNetBgBlock , !isLoading{
+            isLoading = true
+            selectNetBgBlock()
         }
     }
 }

@@ -48,10 +48,10 @@
                             <action selector="selectAction:" destination="Abm-35-XTZ" eventType="touchUpInside" id="BOx-vv-Xpi"/>
                         </connections>
                     </button>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="efr-r0-T7d">
+                    <view hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="efr-r0-T7d">
                         <rect key="frame" x="0.0" y="0.0" width="104" height="104"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="download.png" translatesAutoresizingMaskIntoConstraints="NO" id="Wzr-ab-4Ee">
+                            <imageView userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Wzr-ab-4Ee">
                                 <rect key="frame" x="42" y="42" width="20" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="20" id="0fa-9G-abN"/>
@@ -59,11 +59,7 @@
                                 </constraints>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.30149406934306572" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="Wzr-ab-4Ee" firstAttribute="centerX" secondItem="efr-r0-T7d" secondAttribute="centerX" id="dbA-Pi-7bi"/>
-                            <constraint firstItem="Wzr-ab-4Ee" firstAttribute="centerY" secondItem="efr-r0-T7d" secondAttribute="centerY" id="kHJ-sL-02E"/>
-                        </constraints>
+                        <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
                 </subviews>
             </view>
@@ -74,8 +70,10 @@
                 <constraint firstItem="efr-r0-T7d" firstAttribute="trailing" secondItem="jP5-vM-Lsd" secondAttribute="trailing" id="9Y1-3U-JkU"/>
                 <constraint firstItem="jP5-vM-Lsd" firstAttribute="top" secondItem="Abm-35-XTZ" secondAttribute="top" id="JXP-eP-xZZ"/>
                 <constraint firstItem="RpC-ph-4bo" firstAttribute="top" secondItem="Abm-35-XTZ" secondAttribute="top" constant="8" id="X3Z-WL-Liu"/>
+                <constraint firstItem="Wzr-ab-4Ee" firstAttribute="centerX" secondItem="jP5-vM-Lsd" secondAttribute="centerX" id="cRI-YT-pxH"/>
                 <constraint firstItem="efr-r0-T7d" firstAttribute="leading" secondItem="jP5-vM-Lsd" secondAttribute="leading" id="d8T-7s-yaa"/>
                 <constraint firstItem="JzQ-Ar-r9E" firstAttribute="top" secondItem="Abm-35-XTZ" secondAttribute="top" id="dTf-Ui-FKM"/>
+                <constraint firstItem="Wzr-ab-4Ee" firstAttribute="centerY" secondItem="jP5-vM-Lsd" secondAttribute="centerY" id="lZc-OV-QkE"/>
                 <constraint firstItem="efr-r0-T7d" firstAttribute="top" secondItem="jP5-vM-Lsd" secondAttribute="top" id="oNm-0V-GuJ"/>
                 <constraint firstAttribute="trailing" secondItem="JzQ-Ar-r9E" secondAttribute="trailing" id="olT-fW-TBU"/>
                 <constraint firstAttribute="bottom" secondItem="jP5-vM-Lsd" secondAttribute="bottom" id="p5q-U6-tTs"/>
@@ -83,12 +81,12 @@
             </constraints>
             <size key="customSize" width="104" height="104"/>
             <connections>
+                <outlet property="downloadImageView" destination="Wzr-ab-4Ee" id="W4i-dz-6Ak"/>
+                <outlet property="netbgImageViewTop" destination="oNm-0V-GuJ" id="zhR-0R-nha"/>
+                <outlet property="netbgView" destination="efr-r0-T7d" id="mqS-o7-krK"/>
                 <outlet property="photoImageView" destination="jP5-vM-Lsd" id="o5x-O4-Vuh"/>
                 <outlet property="selectNumBt" destination="RpC-ph-4bo" id="ofE-mw-VGu"/>
             </connections>
         </collectionViewCell>
     </objects>
-    <resources>
-        <image name="download.png" width="20" height="20"/>
-    </resources>
 </document>

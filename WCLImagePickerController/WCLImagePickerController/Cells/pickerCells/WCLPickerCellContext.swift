@@ -90,6 +90,13 @@ class WCLPickerCellContext: NSObject {
                 weakCell?.selectNumBt.isSelected = false
                 cell.selectNumBt.setTitle("", for: .normal)
             }
+            weakCell?.netbgView.isHidden = true
+            weakCell?.netbgImageViewTop.constant = 0
+            pickerManager.opinionWithicloud(alasset: photoAsset, resultHandler: { (isNet) in
+                weakCell?.netbgView.isHidden = !isNet
+            })
+            
+            
             setPickerSelectBlock(cell: cell, photoAsset: photoAsset, ablumIndex: ablumIndex, photoIndex: photoIndexPath)
         }
         return cell
@@ -97,6 +104,28 @@ class WCLPickerCellContext: NSObject {
     
     private func setPickerSelectBlock(cell: WCLPickerCVCell, photoAsset: PHAsset, ablumIndex: Int, photoIndex: Int) {
         weak var weakCell = cell
+        
+        //点击下载网络图片
+        cell.selectNetBgBlock = { [weak self] () in
+            guard let `self` = self else { return }
+            self.pickerManager.getiCloudPhotoData(alasset: photoAsset, progressHandler: { (progress, error) in
+                print("progress:\(progress) error:\(error)")
+                guard let `weakCell` = weakCell else { return }
+                if let _ = error {
+                    weakCell.isLoading = false
+                    weakCell.netbgImageViewTop.constant = 0
+                    weakCell.netbgView.isHidden = false
+                } else {
+                    weakCell.netbgImageViewTop.constant = weakCell.photoImageView.frame.height*CGFloat(progress)
+                }
+            }, resultHandler: { (_, _) in
+                guard let `weakCell` = weakCell else { return }
+                weakCell.isLoading = false
+                weakCell.netbgImageViewTop.constant = 0
+                weakCell.netbgView.isHidden = true
+            })
+        }
+        
         //判断selectCV是需要加入还是删除
         cell.selectBlock = { [weak self] () in
             let selectCount = self?.pickerManager.selectPhotoArr.count ?? 0

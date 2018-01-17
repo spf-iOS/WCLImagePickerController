@@ -242,6 +242,7 @@ public class WCLPickerManager: NSObject {
     ///
     /// - Parameters:
     ///   - alasset: 相册里图片的PHAsset
+    ///   - progressHandler: 进度
     ///   - resultHandler: 返回照片元数据的回调
     public func getiCloudPhotoData(alasset: PHAsset?, progressHandler: ((_ progress:Double, _ error:Error?) -> Void)?, resultHandler: ((Data?, UIImageOrientation) -> Void)?) {
         if alasset != nil {
@@ -249,10 +250,15 @@ public class WCLPickerManager: NSObject {
             option.isNetworkAccessAllowed = true
             option.isSynchronous = false
             option.progressHandler = { (progress, error, stop, info) in
-                progressHandler?(progress,error)
+                DispatchQueue.main.async {
+                    progressHandler?(progress,error)
+                }
+                
             }
             self.netImageManager.requestImageData(for: alasset!, options: option, resultHandler: { (data, str, orientation, hashable) in
-                resultHandler?(data, orientation)
+                DispatchQueue.main.async {
+                    resultHandler?(data, orientation)
+                }
             })
         }
     }
@@ -268,6 +274,28 @@ public class WCLPickerManager: NSObject {
             self.photoManage.requestImageData(for: alasset!, options: nil, resultHandler: { (data, str, orientation, hashable) in
                 resultHandler?(data == nil)
             })
+        }
+    }
+    
+    
+    /// 根据PHAsset获取是否是网络资源,如果是网络资源直接下载
+    ///
+    /// - Parameters:
+    ///   - alasset: 相册里图片的PHAsset
+    ///   - progressHandler: 进度
+    ///   - completeHandler: 是否完成
+    public func downLoadicloudImage(alasset: PHAsset?,
+                                    progressHandler: ((_ progress:Double, _ error:Error?) -> Void)?,
+                                    completeHandler: (() -> Void)?){
+        guard let `alasset` = alasset else { return }
+        opinionWithicloud(alasset: alasset) { [weak self] (isNet) in
+            guard let `self` = self else { return }
+            if isNet {
+                self.getiCloudPhotoData(alasset: alasset, progressHandler: progressHandler, resultHandler: { (_, _) in
+                    completeHandler?()
+                })
+            }
+            
         }
     }
     
