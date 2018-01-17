@@ -109,7 +109,6 @@ class WCLPickerCellContext: NSObject {
         cell.selectNetBgBlock = { [weak self] () in
             guard let `self` = self else { return }
             self.pickerManager.getiCloudPhotoData(alasset: photoAsset, progressHandler: { (progress, error) in
-                print("progress:\(progress) error:\(error)")
                 guard let `weakCell` = weakCell else { return }
                 if let _ = error {
                     weakCell.isLoading = false
