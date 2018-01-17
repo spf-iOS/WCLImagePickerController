@@ -259,6 +259,11 @@ public class WCLPickerManager: NSObject {
         let userResult = PHAssetCollection.fetchTopLevelUserCollections(with: nil)
         //获取智能相册
         let smartResult = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .albumRegular, options: nil)
+        //获取icloud分享图片
+        let cloudSharedResult = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .albumCloudShared, options: nil)
+        //获取icloud照片流
+        let cloudResult = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .albumMyPhotoStream, options: nil)
+
         //将获取的相册加入到相册的数组中
         photoAlbums.append([WCLImagePickerBundle.localizedString(key: "全部照片"): allResult])
         
@@ -267,7 +272,8 @@ public class WCLPickerManager: NSObject {
             //通过检索条件从assetcollection中检索出结果
             let assetResult = PHAsset.fetchAssets(in: assetcollection, options: options)
             if assetResult.count != 0 {
-                self.photoAlbums.append([assetcollection.localizedTitle!:assetResult])
+                let key = collection.localizedTitle ?? "未知类型"
+                self.photoAlbums.append([key:assetResult])
             }
         }
         
@@ -275,7 +281,26 @@ public class WCLPickerManager: NSObject {
             //通过检索条件从assetcollection中检索出结果
             let assetResult = PHAsset.fetchAssets(in: collection, options: options)
             if assetResult.count != 0 {
-                self.photoAlbums.append([collection.localizedTitle!:assetResult])
+                let key = collection.localizedTitle ?? "未知类型"
+                self.photoAlbums.append([key:assetResult])
+            }
+        }
+        
+        cloudSharedResult.enumerateObjects(options: .concurrent) { (collection, index, stop) in
+            //通过检索条件从assetcollection中检索出结果
+            let assetResult = PHAsset.fetchAssets(in: collection, options: options)
+            if assetResult.count != 0 {
+                let key = collection.localizedTitle ?? "未知类型"
+                self.photoAlbums.append([key:assetResult])
+            }
+        }
+        
+        cloudResult.enumerateObjects(options: .concurrent) { (collection, index, stop) in
+            //通过检索条件从assetcollection中检索出结果
+            let assetResult = PHAsset.fetchAssets(in: collection, options: options)
+            if assetResult.count != 0 {
+                let key = collection.localizedTitle ?? "未知类型"
+                self.photoAlbums.append([key:assetResult])
             }
         }
     }
