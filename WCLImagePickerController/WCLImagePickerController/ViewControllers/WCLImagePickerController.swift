@@ -381,7 +381,7 @@ extension WCLImagePickerController: UIImagePickerControllerDelegate,
     //MARK: UIImagePickerControllerDelegate
     public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            picker.dismiss(animated: true, completion: {
+            picker.dismiss(animated: false, completion: {
                 DispatchQueue.main.async {
                     self.delegate?.wclImagePickerComplete(self, imageArr: [image])
                 }
