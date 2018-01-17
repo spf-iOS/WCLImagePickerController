@@ -50,6 +50,7 @@ public class WCLPickerManager: NSObject {
     
     private var photoManage = PHCachingImageManager()
     private let photoOption = PHImageRequestOptions()
+    private let netImageManager = PHImageManager.default()
     private let photoCreationDate = "creationDate"
 
     //MARK: Override
@@ -231,6 +232,41 @@ public class WCLPickerManager: NSObject {
         if alasset != nil {
             self.photoManage.requestImageData(for: alasset!, options: nil, resultHandler: { (data, str, orientation, hashable) in
                 resultHandler?(data, orientation)
+            })
+        }
+    }
+    
+    
+    
+    ///  根据PHAsset获取iCloud-photo的元数据
+    ///
+    /// - Parameters:
+    ///   - alasset: 相册里图片的PHAsset
+    ///   - resultHandler: 返回照片元数据的回调
+    public func getiCloudPhotoData(alasset: PHAsset?, progressHandler: ((_ progress:Double, _ error:Error?) -> Void)?, resultHandler: ((Data?, UIImageOrientation) -> Void)?) {
+        if alasset != nil {
+            let option = PHImageRequestOptions()
+            option.isNetworkAccessAllowed = true
+            option.isSynchronous = false
+            option.progressHandler = { (progress, error, stop, info) in
+                progressHandler?(progress,error)
+            }
+            self.netImageManager.requestImageData(for: alasset!, options: option, resultHandler: { (data, str, orientation, hashable) in
+                resultHandler?(data, orientation)
+            })
+        }
+    }
+    
+    
+    /// 根据PHAsset获取是否是网络资源
+    ///
+    /// - Parameters:
+    ///   - alasset: 相册里图片的PHAsset
+    ///   - resultHandler: 是否是网络资源
+    public func opinionWithicloud(alasset: PHAsset?, resultHandler: ((Bool) -> Void)?){
+        if alasset != nil {
+            self.photoManage.requestImageData(for: alasset!, options: nil, resultHandler: { (data, str, orientation, hashable) in
+                resultHandler?(data == nil)
             })
         }
     }
