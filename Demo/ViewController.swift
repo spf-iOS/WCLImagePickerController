@@ -27,8 +27,8 @@ class ViewController: UIViewController, WCLImagePikcerDelegate {
 //        WCLImagePickerController.present(inVC: self, delegate: self)
         /// 或者只初始化WCLImagePickerController.init
         /// WCLImagePickerController.init(delegate: self)
-        
-        MGPhotoLib.showView(selectMaxNum: 3) { (images) in
+//        WCLImagePickerOptions.isShowSelecView = false
+        MGPhotoLib.showView(selectMaxNum: 1) { (images) in
             print("\(images)")
         }
     }
