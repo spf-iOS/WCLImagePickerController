@@ -37,5 +37,20 @@ public protocol WCLImagePikcerDelegate: class {
 extension WCLImagePikcerDelegate {
     public func wclImagePickerCancel(_ picker: WCLImagePickerController) -> Void {}
     public func wclImagePickerComplete(_ picker: WCLImagePickerController, imageArr: [UIImage]) -> Void {}
-    public func wclImagePickerError(_ picker: WCLImagePickerController, error: WCLError) -> Void {}
+    public func wclImagePickerError(_ picker: WCLImagePickerController, error: WCLError) {
+        let al = UIAlertController.init(title: nil, message: error.lcalizable, preferredStyle: .alert)
+        let cancel = UIAlertAction.init(title: "取消", style: .cancel, handler: nil)
+        al.addAction(cancel)
+        if error != .noMoreThanImages {
+            let ok = UIAlertAction(title: "去设置", style: .default,
+                                   handler: {
+                                    action in
+                                    guard let phoneURL = URL(string: UIApplicationOpenSettingsURLString) else {  return
+                                    }
+                                    UIApplication.shared.openURL(phoneURL)
+            })
+            al.addAction(ok)
+        }
+        picker.present(al, animated: true, completion: nil)
+    }
 }

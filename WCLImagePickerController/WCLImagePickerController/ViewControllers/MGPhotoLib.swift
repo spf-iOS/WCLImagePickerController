@@ -18,8 +18,13 @@ public class MGPhotoTool {
     private var imageBlock: MGPhotoImageBlock?
     
     public func showView(selectMaxNum num:Int,
+                         inVC: UIViewController? = nil,
                          completionBlock: @escaping MGPhotoImageBlock) {
-        guard let vc = UIApplication.shared.keyWindow?.rootViewController else { return }
+        var vc: UIViewController? = inVC
+        if vc == nil {
+            vc = UIApplication.shared.keyWindow?.rootViewController
+        }
+        guard vc != nil else { return }
         WCLImagePickerOptions.maxPhotoSelectNum = num
         imageBlock = completionBlock
         WCLImagePickerController.present(inVC: vc, delegate: self)
@@ -37,23 +42,6 @@ extension MGPhotoTool: WCLImagePikcerDelegate {
         picker.dismiss(animated: true, completion: nil)
         imageBlock?(imageArr)
         imageBlock = nil
-    }
-    
-    public func wclImagePickerError(_ picker: WCLImagePickerController, error: WCLError) {
-        let al = UIAlertController.init(title: nil, message: error.lcalizable, preferredStyle: .alert)
-        let cancel = UIAlertAction.init(title: "取消", style: .cancel, handler: nil)
-        al.addAction(cancel)
-        if error != .noMoreThanImages {
-            let ok = UIAlertAction(title: "去设置", style: .default,
-                                   handler: {
-                                    action in
-                                    guard let phoneURL = URL(string: UIApplicationOpenSettingsURLString) else {  return
-                                    }
-                                    UIApplication.shared.openURL(phoneURL)
-            })
-            al.addAction(ok)
-        }
-        picker.present(al, animated: true, completion: nil)
     }
     
 }

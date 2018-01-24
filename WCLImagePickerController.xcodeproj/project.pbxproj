@@ -50,6 +50,7 @@
 		9717A2741E25BE8A0075D33E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9717A2731E25BE8A0075D33E /* UIKit.framework */; };
 		9717A27A1E25D7050075D33E /* WCLImagePickerController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9717A1B21E2517C90075D33E /* WCLImagePickerController.framework */; };
 		9717A27B1E25D7050075D33E /* WCLImagePickerController.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9717A1B21E2517C90075D33E /* WCLImagePickerController.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E464971920185F1F00BC529F /* UIImage+MGCrop.swift in Sources */ = {isa = PBXBuildFile; fileRef = E464971820185F1F00BC529F /* UIImage+MGCrop.swift */; };
 		E4A82404200CF39300C2BCD3 /* MGPhotoLib.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A82403200CF39300C2BCD3 /* MGPhotoLib.swift */; };
 /* End PBXBuildFile section */
 
@@ -123,6 +124,7 @@
 		9717A24D1E2519E40075D33E /* WCLImagePickerController.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WCLImagePickerController.bundle; sourceTree = "<group>"; };
 		9717A2711E25BE830075D33E /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		9717A2731E25BE8A0075D33E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		E464971820185F1F00BC529F /* UIImage+MGCrop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+MGCrop.swift"; sourceTree = "<group>"; };
 		E4A82403200CF39300C2BCD3 /* MGPhotoLib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MGPhotoLib.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -259,6 +261,7 @@
 				9717A2421E2519E40075D33E /* WCLPhotoBrowserController.swift */,
 				9717A2431E2519E40075D33E /* WCLPhotoBrowserController.xib */,
 				E4A82403200CF39300C2BCD3 /* MGPhotoLib.swift */,
+				E464971820185F1F00BC529F /* UIImage+MGCrop.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -420,6 +423,7 @@
 				9717A2621E2519E40075D33E /* WCLPickerManager.swift in Sources */,
 				9717A2581E2519E40075D33E /* WCLAblumListCell.swift in Sources */,
 				9717A25B1E2519E40075D33E /* WCLError.swift in Sources */,
+				E464971920185F1F00BC529F /* UIImage+MGCrop.swift in Sources */,
 				9717A2541E2519E40075D33E /* WCLPickerCVCell.swift in Sources */,
 				9717A2561E2519E40075D33E /* WCLSelecteCVCell.swift in Sources */,
 				9717A25C1E2519E40075D33E /* WCLImagePickerBundle.swift in Sources */,

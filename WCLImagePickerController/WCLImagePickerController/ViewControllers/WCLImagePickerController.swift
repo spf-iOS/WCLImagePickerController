@@ -106,22 +106,23 @@ public class WCLImagePickerController: UIViewController {
     
     override func photoRightAction(_ sender: UIButton) {
         var imageArr = [UIImage]()
-        if pickerManager != nil {
-            let count = pickerManager!.selectPhotoArr.count
+        if let `pickerManager` = pickerManager {
+            let count = pickerManager.selectPhotoArr.count
             if count == 0 {
                 delegate?.wclImagePickerComplete(self, imageArr: imageArr)
                 return
             }
-            for asset in pickerManager!.selectPhotoArr {
-                pickerManager!.getPhotoData(alasset: asset, resultHandler: { [weak self] (data, orientation) in
-                    if data != nil {
-                        let image = UIImage.init(data: data!)
-                        if image != nil {
-                            imageArr.append(image!)
+            for asset in pickerManager.selectPhotoArr {
+                pickerManager.getPhotoData(alasset: asset, resultHandler: { [weak self] (data, orientation) in
+                    if let `data` = data {
+                        let image = UIImage.init(data: data)
+                        if let `image` = image {
+                            imageArr.append(image)
                         }
                         if imageArr.count == count {
                             DispatchQueue.main.async {
-                                self?.delegate?.wclImagePickerComplete(self!, imageArr: imageArr)
+                                guard let `self` = self else { return }
+                                self.delegate?.wclImagePickerComplete(self, imageArr: imageArr)
                             }
                         }
                     }

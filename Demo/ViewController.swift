@@ -10,7 +10,9 @@ import UIKit
 import WCLImagePickerController
 
 class ViewController: UIViewController, WCLImagePikcerDelegate {
-
+    @IBOutlet weak var imageView: UIImageView!
+    
+    @IBOutlet weak var bottomImageView: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -28,9 +30,17 @@ class ViewController: UIViewController, WCLImagePikcerDelegate {
         /// 或者只初始化WCLImagePickerController.init
         /// WCLImagePickerController.init(delegate: self)
 //        WCLImagePickerOptions.isShowSelecView = false
-        MGPhotoLib.showView(selectMaxNum: 1) { (images) in
-            print("\(images)")
+        MGPhotoLib.showView(selectMaxNum: 1, inVC: self.navigationController) { (images) in
+            if let firstImage = images.first {
+                let cropImage = firstImage.cropImage(withSize: CGSize(width: 30, height: 30))!
+                self.imageView.image = cropImage
+                let cropImage1 = firstImage.cropImage(withSize: CGSize(width: 10, height: 100), withCropMode: .center)!
+                self.bottomImageView.image = cropImage1
+            }
         }
+//        MGPhotoLib.showView(selectMaxNum: 1) { (images) in
+//            print("\(images)")
+//        }
     }
     
     func wclImagePickerCancel(_ picker: WCLImagePickerController) {
