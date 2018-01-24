@@ -17,6 +17,13 @@ public enum MGImageCropMode : Int {
 }
 
 extension UIImage {
+    
+    /// 图片裁剪
+    ///
+    /// - Parameters:
+    ///   - toSize: 裁剪大小
+    ///   - cropModel: 裁剪方式
+    /// - Returns: UIImage
     public func cropImage(withSize toSize: CGSize, withCropMode cropModel: MGImageCropMode = .autoScale) -> UIImage? {
         guard  toSize.width > 0 else { return nil }
         guard  toSize.height > 0 else { return nil }
