@@ -332,12 +332,13 @@ public class WCLPickerManager: NSObject {
         photoAlbums.append([WCLImagePickerBundle.localizedString(key: "全部照片"): allResult])
         
         userResult.enumerateObjects(options: .concurrent) { (collection, index, stop) in
-            let assetcollection = collection as! PHAssetCollection
-            //通过检索条件从assetcollection中检索出结果
-            let assetResult = PHAsset.fetchAssets(in: assetcollection, options: options)
-            if assetResult.count != 0 {
-                let key = collection.localizedTitle ?? "未知类型"
-                self.photoAlbums.append([key:assetResult])
+            if let assetcollection = collection as? PHAssetCollection {
+                //通过检索条件从assetcollection中检索出结果
+                let assetResult = PHAsset.fetchAssets(in: assetcollection, options: options)
+                if assetResult.count != 0 {
+                    let key = collection.localizedTitle ?? "未知类型"
+                    self.photoAlbums.append([key:assetResult])
+                }
             }
         }
         

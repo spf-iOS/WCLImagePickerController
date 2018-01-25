@@ -111,10 +111,12 @@ internal class WCLPhotoBrowserController: UIViewController {
     //MARK: Private Methods
     fileprivate func countSelectIndex(_ index: Int) {
         if isSelect {
-            setWCLPhotoNavTitle("\(index+1)/\(selectAssetArr!.count)")
+            let selectAssetCount = selectAssetArr?.count ?? 0
+            setWCLPhotoNavTitle("\(index+1)/\(selectAssetCount)")
             selecView.selecrIndex = index+1
         }else {
-            setWCLPhotoNavTitle("\(index+1)/\(photoResult!.count)")
+            let photoResultCount = photoResult?.count ?? 0
+            setWCLPhotoNavTitle("\(index+1)/\(photoResultCount)")
             if let alasset = photoResult?[index] {
                 let aindex = pickerManager.index(ofSelect: alasset)
                 if aindex == nil {
@@ -208,19 +210,19 @@ extension WCLPhotoBrowserController:  UICollectionViewDelegate,
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         var asset: PHAsset?
         if isSelect {
-            asset = selectAssetArr![indexPath.row]
+            asset = selectAssetArr?[indexPath.row]
         }else {
-            asset = photoResult![indexPath.row]
+            asset = photoResult?[indexPath.row]
         }
-        let cell = context!.getCell(asset: asset!, collectionView: collectionView, indexPath: indexPath)
-        return cell
+        let cell = context?.getCell(asset: asset ?? PHAsset(), collectionView: collectionView, indexPath: indexPath)
+        return cell ?? UICollectionViewCell()
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if isSelect {
-            return selectAssetArr!.count
+            return selectAssetArr?.count ?? 0
         }else {
-            return photoResult!.count
+            return photoResult?.count ?? 0
         }
     }
 }
