@@ -28,16 +28,17 @@ extension UIImage {
         guard  toSize.width > 0 else { return nil }
         guard  toSize.height > 0 else { return nil }
         var fitSize = toSize
-        var scale: CGFloat = 1
+        var cropScale: CGFloat = 1
+        let imageSize = CGSize(width: size.width*scale, height: size.height*scale)
         if cropModel == .autoScale {
-            let scaleX = size.width/toSize.width
-            let scaleY = size.height/toSize.height
-            scale = scaleX < scaleY ? scaleX : scaleY
-            fitSize = CGSize(width: scale*toSize.width, height: scale*toSize.height)
+            let scaleX = imageSize.width/toSize.width
+            let scaleY = imageSize.height/toSize.height
+            cropScale = scaleX < scaleY ? scaleX : scaleY
+            fitSize = CGSize(width: cropScale*toSize.width, height: cropScale*toSize.height)
         }
-        let fitRect = CGRect(origin: CGPoint(x: (size.width - fitSize.width)/2, y: (size.height - fitSize.height)/2), size: fitSize)
+        let fitRect = CGRect(origin: CGPoint(x: (imageSize.width - fitSize.width)/2, y: (imageSize.height - fitSize.height)/2), size: fitSize)
         if let fitImage = self.cgImage?.cropping(to: fitRect) {
-            let cropImage = UIImage(cgImage: fitImage, scale: scale, orientation: self.imageOrientation)
+            let cropImage = UIImage(cgImage: fitImage, scale: cropScale, orientation: self.imageOrientation)
             return cropImage
         }
         return nil

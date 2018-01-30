@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
 
   s.name          = "MGPhotoLib"
-  s.version       = "4.0.3"
+  s.version       = "4.0.4"
   s.summary       = "由swift实现可自定义的图片选择器。"
 
   s.homepage      = "https://github.com/spf-iOS/WCLImagePickerController"
