@@ -32,9 +32,9 @@ class ViewController: UIViewController, WCLImagePikcerDelegate {
 //        WCLImagePickerOptions.isShowSelecView = false
         MGPhotoLib.showView(selectMaxNum: 1, inVC: self.navigationController) { (images) in
             if let firstImage = images.first {
-                let cropImage = firstImage.cropImage(withSize: CGSize(width: 30, height: 30))!
+                let cropImage = firstImage.cropImage(withSize: CGSize(width: 100, height: 100))!
                 self.imageView.image = cropImage
-                let cropImage1 = firstImage.cropImage(withSize: CGSize(width: 10, height: 100), withCropMode: .center)!
+                let cropImage1 = firstImage.cropImage(withSize: CGSize(width: 100, height: 100), withCropMode: .center)!
                 self.bottomImageView.image = cropImage1
             }
         }

@@ -38,8 +38,13 @@ extension UIImage {
         }
         let fitRect = CGRect(origin: CGPoint(x: (imageSize.width - fitSize.width)/2, y: (imageSize.height - fitSize.height)/2), size: fitSize)
         if let fitImage = self.cgImage?.cropping(to: fitRect) {
+            //截取
             let cropImage = UIImage(cgImage: fitImage, scale: cropScale, orientation: self.imageOrientation)
-            return cropImage
+            //缩放
+            UIGraphicsBeginImageContext(toSize)
+            cropImage.draw(in: CGRect(origin: CGPoint.zero, size: toSize))
+            let scaleImage = UIGraphicsGetImageFromCurrentImageContext()
+            return scaleImage
         }
         return nil
     }
