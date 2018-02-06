@@ -56,19 +56,19 @@ internal class WCLPhotoSelectView: UIView,
         NotificationCenter.default.addObserver(self, selector: #selector(deleteSelectTotalNum(_ :)), name: WCLImagePickerNotify.deleteSelectCell, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(insertSelectTotalNum(_ :)), name: WCLImagePickerNotify.insertSelectCell, object: nil)
         
-        let size = CGSize.init(width: 26, height: 26)
-        UIGraphicsBeginImageContextWithOptions(size, false, UIScreen.main.scale)
-        let context = UIGraphicsGetCurrentContext()
-        if let color = WCLImagePickerOptions.pickerSelectColor {
-            color.setFill()
-        }else {
-            WCLImagePickerOptions.tintColor.setFill()
-        }
-        context?.addArc(center: CGPoint.init(x: size.width / 2, y: size.height / 2), radius: size.width / 2, startAngle: 0, endAngle: CGFloat(Double.pi * 2), clockwise: true)
-        context?.fillPath()
-        let selectImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        imageSelectImage.image = selectImage
+//        let size = CGSize.init(width: 26, height: 26)
+//        UIGraphicsBeginImageContextWithOptions(size, false, UIScreen.main.scale)
+//        let context = UIGraphicsGetCurrentContext()
+//        if let color = WCLImagePickerOptions.pickerSelectColor {
+//            color.setFill()
+//        }else {
+//            WCLImagePickerOptions.tintColor.setFill()
+//        }
+//        context?.addArc(center: CGPoint.init(x: size.width / 2, y: size.height / 2), radius: size.width / 2, startAngle: 0, endAngle: CGFloat(Double.pi * 2), clockwise: true)
+//        context?.fillPath()
+//        let selectImage = UIGraphicsGetImageFromCurrentImageContext()
+//        UIGraphicsEndImageContext()
+//        imageSelectImage.image = selectImage
     }
     
     override func layoutSubviews() {
