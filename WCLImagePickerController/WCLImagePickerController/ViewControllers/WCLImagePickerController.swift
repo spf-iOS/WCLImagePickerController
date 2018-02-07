@@ -123,6 +123,7 @@ public class WCLImagePickerController: UIViewController {
                             DispatchQueue.main.async {
                                 guard let `self` = self else { return }
                                 self.delegate?.wclImagePickerComplete(self, imageArr: imageArr)
+                                self.delegate = nil
                             }
                         }
                     }
