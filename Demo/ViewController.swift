@@ -30,11 +30,11 @@ class ViewController: UIViewController, WCLImagePikcerDelegate {
         /// 或者只初始化WCLImagePickerController.init
         /// WCLImagePickerController.init(delegate: self)
 //        WCLImagePickerOptions.isShowSelecView = false
-        MGPhotoLib.showView(selectMaxNum: 1, inVC: self.navigationController) { (images) in
+        MGPhotoLib.showView(selectMaxNum: 1, inVC: self.navigationController) { (images:[WCLImage]) in
             if let firstImage = images.first {
-                let cropImage = firstImage.cropImage(withSize: CGSize(width: 100, height: 100))!
+                let cropImage = firstImage.thumbImage
                 self.imageView.image = cropImage
-                let cropImage1 = firstImage.cropImage(withSize: CGSize(width: 100, height: 100), withCropMode: .center)!
+                let cropImage1 = firstImage.fullScreenImage
                 self.bottomImageView.image = cropImage1
             }
         }

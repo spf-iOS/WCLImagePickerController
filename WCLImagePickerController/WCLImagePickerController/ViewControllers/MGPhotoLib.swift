@@ -15,7 +15,11 @@ public class MGPhotoTool {
     
     public typealias MGPhotoImageBlock = (_ images:[UIImage]) ->()
     
+    public typealias MGPhotoWCLImageBlock = (_ images:[WCLImage]) ->()
+    
     private var imageBlock: MGPhotoImageBlock?
+    
+    private var wclImageBlock: MGPhotoWCLImageBlock?
     
     public func showView(selectMaxNum num:Int,
                          inVC: UIViewController? = nil,
@@ -27,6 +31,19 @@ public class MGPhotoTool {
         guard vc != nil else { return }
         WCLImagePickerOptions.maxPhotoSelectNum = num
         imageBlock = completionBlock
+        WCLImagePickerController.present(inVC: vc, delegate: self)
+    }
+    
+    public func showView(selectMaxNum num:Int,
+                         inVC: UIViewController? = nil,
+                         completionBlock: @escaping MGPhotoWCLImageBlock) {
+        var vc: UIViewController? = inVC
+        if vc == nil {
+            vc = UIApplication.shared.keyWindow?.rootViewController
+        }
+        guard vc != nil else { return }
+        WCLImagePickerOptions.maxPhotoSelectNum = num
+        wclImageBlock = completionBlock
         WCLImagePickerController.present(inVC: vc, delegate: self)
     }
 }
@@ -42,6 +59,12 @@ extension MGPhotoTool: WCLImagePikcerDelegate {
         picker.dismiss(animated: true, completion: nil)
         imageBlock?(imageArr)
         imageBlock = nil
+    }
+    
+    public func wclImagePickerComplete(_ picker: WCLImagePickerController, wclImages: [WCLImage]) {
+        picker.dismiss(animated: true, completion: nil)
+        wclImageBlock?(wclImages)
+        wclImageBlock = nil
     }
     
 }

@@ -25,11 +25,20 @@
 
 import UIKit
 
+public class WCLImage {
+    public var fullScreenImage: UIImage?
+    public var thumbImage: UIImage?
+    public init() {}
+}
+
 public protocol WCLImagePikcerDelegate: class {
     /// 点击取消按钮的回调方法
     func wclImagePickerCancel(_ picker: WCLImagePickerController) -> Void
     /// 选择完成后的回调方法
     func wclImagePickerComplete(_ picker: WCLImagePickerController, imageArr: [UIImage]) -> Void
+    
+    /// 选择完成后的回调方法
+    func wclImagePickerComplete(_ picker: WCLImagePickerController, wclImages: [WCLImage]) -> Void
     /// 反馈错误信息的回调方法
     func wclImagePickerError(_ picker: WCLImagePickerController, error: WCLError) -> Void
 }
@@ -37,6 +46,7 @@ public protocol WCLImagePikcerDelegate: class {
 extension WCLImagePikcerDelegate {
     public func wclImagePickerCancel(_ picker: WCLImagePickerController) -> Void {}
     public func wclImagePickerComplete(_ picker: WCLImagePickerController, imageArr: [UIImage]) -> Void {}
+    public func wclImagePickerComplete(_ picker: WCLImagePickerController, wclImages: [WCLImage]) -> Void {}
     public func wclImagePickerError(_ picker: WCLImagePickerController, error: WCLError) {
         let al = UIAlertController.init(title: nil, message: error.lcalizable, preferredStyle: .alert)
         let cancel = UIAlertAction.init(title: "取消", style: .cancel, handler: nil)

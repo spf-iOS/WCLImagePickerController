@@ -106,18 +106,38 @@ public class WCLImagePickerController: UIViewController {
     
     override func photoRightAction(_ sender: UIButton) {
         var imageArr = [UIImage]()
+        var wclImages = [WCLImage]()
         if let `pickerManager` = pickerManager {
             let count = pickerManager.selectPhotoArr.count
             if count == 0 {
                 delegate?.wclImagePickerComplete(self, imageArr: imageArr)
                 return
             }
+            let photoSize = WCLPickerManager.pickerPhotoSize
+            let scale = UIScreen.main.scale
+            let photoScaleSize = CGSize(width: photoSize.width*scale, height: photoSize.height*scale)
             for asset in pickerManager.selectPhotoArr {
+
                 pickerManager.getPhotoData(alasset: asset, resultHandler: { [weak self] (data, orientation) in
                     if let `data` = data {
                         let image = UIImage.init(data: data)
                         if let `image` = image {
+                            let wclImage = WCLImage()
+                            wclImage.fullScreenImage = image
                             imageArr.append(image)
+                            pickerManager.getPhoto(photoScaleSize, alasset: asset, resultHandler: {[weak self] (thumb, _) in
+                                if let `thumb` = thumb {
+                                    wclImage.thumbImage = thumb
+                                    wclImages.append(wclImage)
+                                }
+                                if wclImages.count == count {
+                                    DispatchQueue.main.async {
+                                        guard let `self` = self else { return }
+                                        self.delegate?.wclImagePickerComplete(self, wclImages: wclImages)
+                                        self.delegate = nil
+                                    }
+                                }
+                            })
                         }
                         if imageArr.count == count {
                             DispatchQueue.main.async {
