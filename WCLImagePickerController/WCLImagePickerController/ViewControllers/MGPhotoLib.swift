@@ -34,16 +34,16 @@ public class MGPhotoTool {
         WCLImagePickerController.present(inVC: vc, delegate: self)
     }
     
-    public func showView(selectMaxNum num:Int,
+    public func showWCLView(selectMaxNum num:Int,
                          inVC: UIViewController? = nil,
-                         completionBlock: @escaping MGPhotoWCLImageBlock) {
+                         completion wclBlock: @escaping MGPhotoWCLImageBlock) {
         var vc: UIViewController? = inVC
         if vc == nil {
             vc = UIApplication.shared.keyWindow?.rootViewController
         }
         guard vc != nil else { return }
         WCLImagePickerOptions.maxPhotoSelectNum = num
-        wclImageBlock = completionBlock
+        wclImageBlock = wclBlock
         WCLImagePickerController.present(inVC: vc, delegate: self)
     }
 }

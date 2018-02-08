@@ -114,8 +114,6 @@ public class WCLImagePickerController: UIViewController {
                 return
             }
             let photoSize = WCLPickerManager.pickerPhotoSize
-            let scale = UIScreen.main.scale
-            let photoScaleSize = CGSize(width: photoSize.width*scale, height: photoSize.height*scale)
             for asset in pickerManager.selectPhotoArr {
 
                 pickerManager.getPhotoData(alasset: asset, resultHandler: { [weak self] (data, orientation) in
@@ -125,7 +123,7 @@ public class WCLImagePickerController: UIViewController {
                             let wclImage = WCLImage()
                             wclImage.fullScreenImage = image
                             imageArr.append(image)
-                            pickerManager.getPhoto(photoScaleSize, alasset: asset, resultHandler: {[weak self] (thumb, _) in
+                            pickerManager.getPhoto(photoSize, alasset: asset, resultHandler: {[weak self] (thumb, _) in
                                 if let `thumb` = thumb {
                                     wclImage.thumbImage = thumb
                                     wclImages.append(wclImage)
