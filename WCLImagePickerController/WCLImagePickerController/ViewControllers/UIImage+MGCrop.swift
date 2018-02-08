@@ -27,6 +27,8 @@ extension UIImage {
     public func cropImage(withSize toSize: CGSize, withCropMode cropModel: MGImageCropMode = .autoScale) -> UIImage? {
         guard  toSize.width > 0 else { return nil }
         guard  toSize.height > 0 else { return nil }
+        let screenScale = UIScreen.main.scale
+        let toSize = CGSize(width: toSize.width*screenScale, height: toSize.height*screenScale)
         var fitSize = toSize
         var cropScale: CGFloat = 1
         let imageSize = CGSize(width: size.width*scale, height: size.height*scale)

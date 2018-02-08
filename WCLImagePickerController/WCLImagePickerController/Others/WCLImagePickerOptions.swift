@@ -42,6 +42,8 @@ public struct WCLImagePickerOptions {
     public static var maxPhotoSelectNum: Int  = 9
     /// 是否显示selectView
     public static var isShowSelecView: Bool   = true
+    /// 得到的缩略图大小
+    public static var thumbSize: CGSize = CGSize(width: 100, height: 100)
     
     /// launchImage的配置
     /// 相册启动图片和启动颜色，二选一，launchImage优先级高

@@ -38,15 +38,15 @@ class ViewController: UIViewController, WCLImagePikcerDelegate {
 //                self.bottomImageView.image = cropImage1
 //            }
 //        }
-        MGPhotoLib.showWCLView(selectMaxNum: 1, inVC: self.navigationController) { (images) in
-            if let firstImage = images.first {
-                let cropImage = firstImage.fullScreenImage
+        MGPhotoLib.showWCLView(selectMaxNum: 10, inVC: self.navigationController) { (images) in
+            for image in images {
+                let cropImage = image.fullScreenImage
                 self.imageView.image = cropImage
-                let cropImage1 = firstImage.thumbImage
+                let cropImage1 = image.thumbImage
+                print("thumbImageSize:\(cropImage1)")
                 self.bottomImageView.image = cropImage1
             }
         }
-        
     }
     
     func wclImagePickerCancel(_ picker: WCLImagePickerController) {

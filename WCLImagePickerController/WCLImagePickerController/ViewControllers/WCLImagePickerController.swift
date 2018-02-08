@@ -113,7 +113,7 @@ public class WCLImagePickerController: UIViewController {
                 delegate?.wclImagePickerComplete(self, imageArr: imageArr)
                 return
             }
-            let photoSize = WCLPickerManager.pickerPhotoSize
+            let photoSize = WCLImagePickerOptions.thumbSize
             for asset in pickerManager.selectPhotoArr {
 
                 pickerManager.getPhotoData(alasset: asset, resultHandler: { [weak self] (data, orientation) in
