@@ -1,0 +1,6 @@
+framework module SPPhotoCropEditor {
+  umbrella header "SPPhotoCropEditor-umbrella.h"
+
+  export *
+  module * { export * }
+}

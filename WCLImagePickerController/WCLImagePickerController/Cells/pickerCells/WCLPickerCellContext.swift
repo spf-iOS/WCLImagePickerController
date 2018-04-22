@@ -79,6 +79,8 @@ class WCLPickerCellContext: NSObject {
         }
         weak var weakCell = cell
         if let photoAsset = pickerManager.getPHAsset(ablumIndex, photoIndex: photoIndexPath) {
+            let image_buffer = WCLImagePickerBundle.imageFromBundle("image_buffer")
+            weakCell?.photoImageView.image = image_buffer
             pickerManager.getPhotoDefalutSize(ablumIndex, photoIndex: photoIndexPath, resultHandler: { (image, infoDic) in
                 weakCell?.photoImageView.image = image
             })
@@ -90,6 +92,7 @@ class WCLPickerCellContext: NSObject {
                 weakCell?.selectNumBt.isSelected = false
                 cell.selectNumBt.setTitle("", for: .normal)
             }
+            weakCell?.selectNumBt.isHidden = WCLImagePickerOptions.isRadio
             weakCell?.netbgView.isHidden = true
             weakCell?.netbgImageViewTop.constant = 0
             pickerManager.opinionWithicloud(alasset: photoAsset, resultHandler: { (isNet) in

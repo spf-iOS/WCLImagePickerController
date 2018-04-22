@@ -36,7 +36,7 @@ internal extension UIViewController {
         rightBt.contentHorizontalAlignment = .right
         rightBt.setTitle(btName, for: UIControlState())
         rightBt.setTitleColor(WCLImagePickerOptions.pickerSelectColor, for: UIControlState())
-        rightBt.titleLabel?.font = UIFont.WCLMediumFontOfSize(15)
+        rightBt.titleLabel?.font = UIFont.WCLMediumFontOfSize(17)
         rightBt.addTarget(self, action: #selector(photoRightAction(_:)), for: .touchUpInside)
         rightBt.frame.size = CGSize(width: 16*CGFloat(btName.count), height: 20)
         navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: rightBt)
@@ -52,7 +52,7 @@ internal extension UIViewController {
         leftBt.contentHorizontalAlignment = .left
         leftBt.setTitle(btName, for: UIControlState())
         leftBt.setTitleColor(WCLImagePickerOptions.navigationTintColor, for: UIControlState())
-        leftBt.titleLabel?.font = UIFont.WCLRegularFontOfSize(15)
+        leftBt.titleLabel?.font = UIFont.WCLRegularFontOfSize(17)
         leftBt.frame.size = CGSize(width: 16*CGFloat(btName.count), height: 20)
         leftBt.addTarget(self, action: #selector(photoLeftAction(_:)), for: .touchUpInside)
         leftBt.sizeToFit()

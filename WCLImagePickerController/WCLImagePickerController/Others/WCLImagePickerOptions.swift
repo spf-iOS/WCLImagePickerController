@@ -42,6 +42,8 @@ public struct WCLImagePickerOptions {
     public static var maxPhotoSelectNum: Int  = 9
     /// 是否显示selectView
     public static var isShowSelecView: Bool   = true
+    /// 是否是单选操作
+    public static var isRadio: Bool   = false
     
     /// launchImage的配置
     /// 相册启动图片和启动颜色，二选一，launchImage优先级高

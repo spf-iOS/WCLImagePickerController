@@ -105,6 +105,28 @@ public class WCLImagePickerController: UIViewController {
     }
     
     override func photoRightAction(_ sender: UIButton) {
+        finishWithImage()
+    }
+    
+    
+    //MARK: Initial Methods
+    public init(delegate: WCLImagePikcerDelegate) {
+        super.init(nibName: "WCLImagePickerController", bundle: WCLImagePickerBundle.bundle)
+        self.delegate = delegate
+    }
+    
+    required public init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    //MARK: Private Methods
+    private func addNotify() {
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadSelect), name: WCLImagePickerNotify.reloadSelect, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadPhoto), name: WCLImagePickerNotify.reloadImagePicker, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(imagePickerError(_:)), name: WCLImagePickerNotify.imagePickerError, object: nil)
+    }
+    
+    private func finishWithImage() {
         var imageArr = [UIImage]()
         if let `pickerManager` = pickerManager {
             let count = pickerManager.selectPhotoArr.count
@@ -132,27 +154,11 @@ public class WCLImagePickerController: UIViewController {
         }
     }
     
-    
-    //MARK: Initial Methods
-    public init(delegate: WCLImagePikcerDelegate) {
-        super.init(nibName: "WCLImagePickerController", bundle: WCLImagePickerBundle.bundle)
-        self.delegate = delegate
-    }
-    
-    required public init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    //MARK: Private Methods
-    private func addNotify() {
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadSelect), name: WCLImagePickerNotify.reloadSelect, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadPhoto), name: WCLImagePickerNotify.reloadImagePicker, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(imagePickerError(_:)), name: WCLImagePickerNotify.imagePickerError, object: nil)
-    }
-    
     private func configNav() {
         addWCLPhotoNavLeftButton(WCLImagePickerBundle.localizedString(key: "取消"))
-        addWCLPhotoNavRightButton(WCLImagePickerBundle.localizedString(key: "完成"))
+        if !WCLImagePickerOptions.isRadio {
+            addWCLPhotoNavRightButton(WCLImagePickerBundle.localizedString(key: "完成"))
+        }
     }
     
     /**
@@ -241,7 +247,7 @@ public class WCLImagePickerController: UIViewController {
     }
     
     fileprivate func addSelectView() {
-        if WCLImagePickerOptions.isShowSelecView {
+        if WCLImagePickerOptions.isShowSelecView && !WCLImagePickerOptions.isRadio {
             let bounds = UIScreen.main.bounds
             let iphone_X: Bool = (bounds.height == 812)
             let bottomMargin: CGFloat = iphone_X ? 34.0:0.0
@@ -342,6 +348,19 @@ extension WCLImagePickerController: UICollectionViewDelegate,
             if WCLImagePickerOptions.needPickerCamera {
                 currentIndex = currentIndex - 1
             }
+            if WCLImagePickerOptions.isRadio,
+                let asset = pickerManager?.getPHAsset(ablumSelectIndex, photoIndex: currentIndex){
+                pickerManager?.getPhotoData(alasset: asset, resultHandler: { [weak self] (data, orientation) in
+                    if let `data` = data,
+                        let image = UIImage(data: data) {
+                        DispatchQueue.main.async {
+                            guard let `self` = self else { return }
+                            self.delegate?.wclRadioImageBlockImagePickerComplete(self, image: image)
+                        }
+                    }
+                })
+                return
+            }
             let browserVC = WCLPhotoBrowserController.init(pickerManager!, currentIndex: currentIndex, photoResult: result)
             navigationController?.pushViewController(browserVC, animated: true)
         }
@@ -385,7 +404,12 @@ extension WCLImagePickerController: UIImagePickerControllerDelegate,
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             picker.dismiss(animated: false, completion: {
                 DispatchQueue.main.async {
-                    self.delegate?.wclImagePickerComplete(self, imageArr: [image])
+                    if WCLImagePickerOptions.isRadio {
+                        self.delegate?.wclRadioImageBlockImagePickerComplete(self, image: image)
+                    }
+                    else {
+                        self.delegate?.wclImagePickerComplete(self, imageArr: [image])
+                    }
                 }
                 PHPhotoLibrary.shared().performChanges({
                     PHAssetChangeRequest.creationRequestForAsset(from: image)

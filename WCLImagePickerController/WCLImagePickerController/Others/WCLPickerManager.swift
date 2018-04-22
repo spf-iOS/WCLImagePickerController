@@ -192,7 +192,7 @@ public class WCLPickerManager: NSObject {
                 if image != nil {
                     resultHandler?(image, infoDic)
                 }else {
-                    let image_buffer = WCLImagePickerBundle.imageFromBundle("image-buffer")
+                    let image_buffer = WCLImagePickerBundle.imageFromBundle("image_buffer")
                     resultHandler?(image_buffer, infoDic)
                 }
             })
@@ -215,7 +215,7 @@ public class WCLPickerManager: NSObject {
                 if image != nil {
                     resultHandler?(image, infoDic)
                 }else {
-                    let image_buffer = WCLImagePickerBundle.imageFromBundle("image-buffer")
+                    let image_buffer = WCLImagePickerBundle.imageFromBundle("image_buffer")
                     resultHandler?(image_buffer, infoDic)
                 }
             })

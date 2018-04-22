@@ -21,6 +21,7 @@ Pod::Spec.new do |s|
   # s.public_header_files = 'WCLImagePickerController/ViewControllers/MGPhotoTool.swift'
   s.resources     = 'WCLImagePickerController/WCLImagePickerController/WCLImagePickerController.bundle'
   s.frameworks    = "UIKit", "Photos"
+  s.dependency "SPPhotoCropEditor"
   s.requires_arc  = true
 
 end

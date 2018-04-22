@@ -30,6 +30,8 @@ public protocol WCLImagePikcerDelegate: class {
     func wclImagePickerCancel(_ picker: WCLImagePickerController) -> Void
     /// 选择完成后的回调方法
     func wclImagePickerComplete(_ picker: WCLImagePickerController, imageArr: [UIImage]) -> Void
+    /// 选择单个后的回调方法
+    func wclRadioImageBlockImagePickerComplete(_ picker: WCLImagePickerController, image: UIImage) -> Void
     /// 反馈错误信息的回调方法
     func wclImagePickerError(_ picker: WCLImagePickerController, error: WCLError) -> Void
 }
@@ -37,6 +39,7 @@ public protocol WCLImagePikcerDelegate: class {
 extension WCLImagePikcerDelegate {
     public func wclImagePickerCancel(_ picker: WCLImagePickerController) -> Void {}
     public func wclImagePickerComplete(_ picker: WCLImagePickerController, imageArr: [UIImage]) -> Void {}
+    public func wclRadioImageBlockImagePickerComplete(_ picker: WCLImagePickerController, image: UIImage) -> Void {}
     public func wclImagePickerError(_ picker: WCLImagePickerController, error: WCLError) {
         let al = UIAlertController.init(title: nil, message: error.lcalizable, preferredStyle: .alert)
         let cancel = UIAlertAction.init(title: "取消", style: .cancel, handler: nil)

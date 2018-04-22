@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import WCLImagePickerController
+import MGPhotoLib
 
 class ViewController: UIViewController, WCLImagePikcerDelegate {
     @IBOutlet weak var imageView: UIImageView!
@@ -22,6 +22,7 @@ class ViewController: UIViewController, WCLImagePikcerDelegate {
         WCLImagePickerOptions.tintColor = UIColor(red: 248.0/255.0, green: 248.0/255.0, blue: 248.0/255.0, alpha: 1)
         WCLImagePickerOptions.pickerSelectColor = UIColor(red: 5.0/255.0, green: 180.0/255.0, blue: 111.0/255.0, alpha: 1)
         WCLImagePickerOptions.statusBarStyle = .default
+        WCLImagePickerOptions.isRadio = true
     }
 
     @IBAction func buttonAction(_ sender: Any) {
@@ -30,14 +31,26 @@ class ViewController: UIViewController, WCLImagePikcerDelegate {
         /// 或者只初始化WCLImagePickerController.init
         /// WCLImagePickerController.init(delegate: self)
 //        WCLImagePickerOptions.isShowSelecView = false
-        MGPhotoLib.showView(selectMaxNum: 1, inVC: self.navigationController) { (images) in
-            if let firstImage = images.first {
-                let cropImage = firstImage.cropImage(withSize: CGSize(width: 100, height: 100))!
-                self.imageView.image = cropImage
-                let cropImage1 = firstImage.cropImage(withSize: CGSize(width: 100, height: 100), withCropMode: .center)!
-                self.bottomImageView.image = cropImage1
-            }
+        MGPhotoLib.showView(cropRatio: 3.0/4, inVC: self) { (firstImage) in
+            let cropImage = firstImage.cropImage(withSize: CGSize(width: 100, height: 100))!
+            self.imageView.image = cropImage
+            let cropImage1 = firstImage.cropImage(withSize: CGSize(width: 100, height: 100), withCropMode: .center)!
+            self.bottomImageView.image = cropImage1
         }
+//        MGPhotoLib.showView(editor: self.navigationController) { (firstImage) in
+//            let cropImage = firstImage.cropImage(withSize: CGSize(width: 100, height: 100))!
+//            self.imageView.image = cropImage
+//            let cropImage1 = firstImage.cropImage(withSize: CGSize(width: 100, height: 100), withCropMode: .center)!
+//            self.bottomImageView.image = cropImage1
+//        }
+//        MGPhotoLib.showView(selectMaxNum: 1, inVC: self.navigationController) { (images) in
+//            if let firstImage = images.first {
+//                let cropImage = firstImage.cropImage(withSize: CGSize(width: 100, height: 100))!
+//                self.imageView.image = cropImage
+//                let cropImage1 = firstImage.cropImage(withSize: CGSize(width: 100, height: 100), withCropMode: .center)!
+//                self.bottomImageView.image = cropImage1
+//            }
+//        }
 //        MGPhotoLib.showView(selectMaxNum: 1) { (images) in
 //            print("\(images)")
 //        }
