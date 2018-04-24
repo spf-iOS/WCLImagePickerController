@@ -77,30 +77,29 @@ class WCLPickerCellContext: NSObject {
         if WCLImagePickerOptions.needPickerCamera == true {
             photoIndexPath = photoIndexPath - 1
         }
-        weak var weakCell = cell
         if let photoAsset = pickerManager.getPHAsset(ablumIndex, photoIndex: photoIndexPath) {
-            let image_buffer = WCLImagePickerBundle.imageFromBundle("image_buffer")
-            weakCell?.photoImageView.image = image_buffer
-            pickerManager.getPhotoDefalutSize(ablumIndex, photoIndex: photoIndexPath, resultHandler: { (image, infoDic) in
-                weakCell?.photoImageView.image = image
-            })
             //改变状态
             if let photoIndex = pickerManager.index(ofSelect: photoAsset) {
-                weakCell?.selectNumBt.isSelected = true
+                cell.selectNumBt.isSelected = true
                 cell.selectNumBt.setTitle("\(photoIndex+1)", for: .selected)
             }else {
-                weakCell?.selectNumBt.isSelected = false
+                cell.selectNumBt.isSelected = false
                 cell.selectNumBt.setTitle("", for: .normal)
             }
-            weakCell?.selectNumBt.isHidden = WCLImagePickerOptions.isRadio
-            weakCell?.netbgView.isHidden = true
-            weakCell?.netbgImageViewTop.constant = 0
+            cell.selectNumBt.isHidden = WCLImagePickerOptions.isRadio
+            cell.netbgView.isHidden = true
+            cell.netbgImageViewTop.constant = 0
             pickerManager.opinionWithicloud(alasset: photoAsset, resultHandler: { (isNet) in
-                weakCell?.netbgView.isHidden = !isNet
+                cell.netbgView.isHidden = !isNet
             })
-            
-            
             setPickerSelectBlock(cell: cell, photoAsset: photoAsset, ablumIndex: ablumIndex, photoIndex: photoIndexPath)
+            let image_buffer = WCLImagePickerBundle.imageFromBundle("image_buffer")
+            cell.photoImageView.image = image_buffer
+            pickerManager.getPhotoDefalutSize(ablumIndex, photoIndex: photoIndexPath, resultHandler: { [weak cell] (image, infoDic) in
+
+                guard let `cell` = cell else { return }
+                cell.photoImageView.image = image
+            })
         }
         return cell
     }

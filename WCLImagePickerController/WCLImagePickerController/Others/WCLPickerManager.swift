@@ -58,7 +58,7 @@ public class WCLPickerManager: NSObject {
         super.init()
         //图片请求设置成快速获取
         self.photoOption.resizeMode   = .fast
-        self.photoOption.isNetworkAccessAllowed = true
+        self.photoOption.isNetworkAccessAllowed = false
         self.photoOption.deliveryMode = .opportunistic
         getPhotoAlbum()
     }
@@ -188,8 +188,10 @@ public class WCLPickerManager: NSObject {
         if photoAsset != nil {
             let scale = UIScreen.main.scale
             let photoScaleSize = CGSize(width: photoSize.width*scale, height: photoSize.height*scale)
+            self.photoOption.isSynchronous = false
             self.photoManage.requestImage(for: photoAsset!, targetSize: photoScaleSize, contentMode: .aspectFill, options: self.photoOption, resultHandler: { (image, infoDic) in
                 if image != nil {
+                    resultHandler?(image, infoDic)
                     resultHandler?(image, infoDic)
                 }else {
                     let image_buffer = WCLImagePickerBundle.imageFromBundle("image_buffer")
