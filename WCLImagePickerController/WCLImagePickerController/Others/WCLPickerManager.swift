@@ -192,7 +192,6 @@ public class WCLPickerManager: NSObject {
             self.photoManage.requestImage(for: photoAsset!, targetSize: photoScaleSize, contentMode: .aspectFill, options: self.photoOption, resultHandler: { (image, infoDic) in
                 if image != nil {
                     resultHandler?(image, infoDic)
-                    resultHandler?(image, infoDic)
                 }else {
                     let image_buffer = WCLImagePickerBundle.imageFromBundle("image_buffer")
                     resultHandler?(image_buffer, infoDic)
@@ -252,15 +251,10 @@ public class WCLPickerManager: NSObject {
             option.isNetworkAccessAllowed = true
             option.isSynchronous = false
             option.progressHandler = { (progress, error, stop, info) in
-                DispatchQueue.main.async {
-                    progressHandler?(progress,error)
-                }
-                
+                progressHandler?(progress,error)
             }
             self.netImageManager.requestImageData(for: alasset!, options: option, resultHandler: { (data, str, orientation, hashable) in
-                DispatchQueue.main.async {
-                    resultHandler?(data, orientation)
-                }
+                resultHandler?(data, orientation)
             })
         }
     }
